@@ -26,6 +26,7 @@ tokio = { workspace = true, features = ["macros", "rt-multi-thread", "signal"] }
 tokio-util = { workspace = true, features = ["io"] }
 
 xdg = "2"
+git2 = "0.18"
 
 # Log stack
 instruments.workspace = true

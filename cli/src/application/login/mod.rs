@@ -13,7 +13,7 @@ use std::time::Duration;
 use anyhow::Context;
 use clap::Args;
 use console::{style, Emoji};
-use indicatif::{ProgressBar, ProgressStyle};
+use indicatif::ProgressBar;
 use instruments::debug;
 
 use crate::{

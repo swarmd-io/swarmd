@@ -36,7 +36,9 @@ impl TryFrom<Cfg> for Env {
 impl Env {
     /// Print a message into the STDOUT
     pub fn println<I: AsRef<str>>(&self, msg: I) -> std::io::Result<()> {
-        self.indicator.println(msg)
+        println!("{}", msg.as_ref());
+        // self.indicator.println(msg)
+        Ok(())
     }
 
     pub fn follow(&self, progress_bar: ProgressBar) -> ProgressBar {

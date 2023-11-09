@@ -1,4 +1,5 @@
 #![feature(result_option_inspect)]
+#![feature(fs_try_exists)]
 
 mod application;
 mod domain;

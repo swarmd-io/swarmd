@@ -2,7 +2,7 @@ use crate::domain::Env;
 use async_trait::async_trait;
 use clap::{Parser, Subcommand};
 
-use super::{command::SwarmdCommand, login::LoginArg};
+use super::{command::SwarmdCommand, create::CreateArg, login::LoginArg};
 
 const NAME: &str = env!("CARGO_CRATE_NAME");
 const VERSION: &str = concat!(
@@ -34,9 +34,10 @@ impl SwarmdCommand for CliConfig {
 /// List of commands
 #[derive(Debug, Subcommand)]
 pub enum Commands {
-    /// Login to Swarmd Edge network with your account and allow you to deploy workers for every
-    /// orgs where you are a member.
+    /// Login to Swarmd Edge network.
     Login(LoginArg),
+    /// Create a new project
+    Create(CreateArg),
 }
 
 #[async_trait]
@@ -45,6 +46,7 @@ impl SwarmdCommand for Commands {
     async fn execute(&self, env: &Env) -> anyhow::Result<()> {
         match self {
             Commands::Login(arg) => arg.execute(env).await,
+            Commands::Create(arg) => arg.execute(env).await,
         }
     }
 }
