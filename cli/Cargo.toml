@@ -1,0 +1,46 @@
+[package]
+name = "swarmd"
+version = "0.1.0"
+edition = "2021"
+description = "Swarmd CLI"
+
+[features]
+default = []
+
+[dependencies]
+anyhow.workspace = true
+async-trait.workspace = true
+async-stream.workspace = true
+clap = { workspace = true, features = ["derive"] }
+config.workspace = true
+derivative.workspace = true
+derive_builder.workspace = true
+dotenv.workspace = true
+indicatif = { workspace = true, features = ["tokio"] }
+thiserror.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+toml.workspace = true
+tower-http = { version = "0.4", features = ["trace"] }
+tokio = { workspace = true, features = ["macros", "rt-multi-thread", "signal"] }
+tokio-util = { workspace = true, features = ["io"] }
+
+xdg = "2"
+
+# Log stack
+instruments.workspace = true
+tracing = { version = "0.1", features = ["max_level_trace", "release_max_level_debug"] }
+tracing-core = "0.1"
+tracing-futures = { version = "0.2", features = ["tokio"] }
+tracing-log = "0.2"
+tracing-subscriber = { version = "0.3", features = ["registry", "env-filter"] }
+
+# Internal
+reqwest = { version = "0.11", features = ["json", "multipart", "tokio-rustls", "gzip", "stream"] }
+console = "0.15"
+futures = { version = "0.3" }
+once_cell = "1.16.0"
+url = { version = "2", features = ["serde"] }
+urlencoding = "2.1.2"
+axum = "0.6.12"
+webbrowser = "0.8.8"

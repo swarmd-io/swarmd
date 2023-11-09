@@ -1,0 +1,14 @@
+[package]
+name = "instruments"
+version = "0.1.0"
+edition = "2021"
+description = "Declarative instrumentation"
+private = true
+
+[features]
+default = []
+
+[dependencies]
+anyhow.workspace = true
+tracing = { workspace = true, features = ["attributes"] }
+tracing-subscriber = { workspace = true, features = ["registry", "env-filter", "json"] }
