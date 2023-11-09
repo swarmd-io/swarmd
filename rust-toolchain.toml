@@ -1,0 +1,4 @@
+[toolchain]
+channel = "nightly-2023-11-03"
+targets = ["aarch64-apple-darwin", "x86_64-unknown-linux-gnu"]
+components = ["clippy", "rust-analysis", "rustfmt", "rust-src"]
