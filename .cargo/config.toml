@@ -1,0 +1,24 @@
+[target.'cfg(any(unix, not(unix))']
+rustflags = ["-Zmacro-backtrace", "-Zdebug-macros", "-Zthreads=8"]
+
+[target.x86_64-unknown-linux-gnu]
+rustflags = [
+    "-Zmacro-backtrace",
+    "-Zdebug-macros",
+    "-Zthreads=8"
+]
+
+[target.aarch64-apple-darwin]
+rustflags = [
+    "-Zmacro-backtrace",
+    "-Zdebug-macros",
+    "-Zthreads=8",
+    "-C",
+    "link-arg=-fuse-ld=mold",
+    "--cfg",
+    "tokio_unstable"
+]
+
+[term]
+verbose = false
+color = 'auto'
