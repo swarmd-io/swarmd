@@ -11,6 +11,7 @@ default = []
 anyhow.workspace = true
 async-trait.workspace = true
 async-stream.workspace = true
+base64.workspace = true
 clap = { workspace = true, features = ["derive"] }
 config.workspace = true
 derivative.workspace = true
@@ -27,6 +28,10 @@ tokio-util = { workspace = true, features = ["io"] }
 
 xdg = "2"
 git2 = "0.18"
+cfg-if = "1"
+serde_with = "3"
+slug-rs.workspace = true
+swarmd-generated.workspace = true
 
 # Log stack
 instruments.workspace = true
@@ -45,3 +50,6 @@ url = { version = "2", features = ["serde"] }
 urlencoding = "2.1.2"
 axum = "0.6.12"
 webbrowser = "0.8.8"
+
+[dev-dependencies]
+insta.workspace = true

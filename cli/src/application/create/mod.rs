@@ -1,18 +1,10 @@
-use std::{path::PathBuf, time::Duration};
-
+use super::command::SwarmdCommand;
+use crate::domain::Env;
 use anyhow::{bail, Context};
 use clap::{Args, ValueEnum};
 use console::{style, Emoji};
 use git2::Repository;
-use indicatif::ProgressBar;
 use instruments::debug;
-
-use crate::{
-    domain::{auth::AuthContext, Env},
-    package::HttpAuthServer,
-};
-
-use super::command::SwarmdCommand;
 
 static CREATE: Emoji<'_, '_> = Emoji("📦 ", "");
 static SAVE: Emoji<'_, '_> = Emoji("💾 ", "");

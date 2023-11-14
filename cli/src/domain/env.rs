@@ -1,18 +1,18 @@
-use std::time::Duration;
-
 use anyhow::Context;
 use indicatif::{MultiProgress, ProgressBar};
-use reqwest::{Client, Url};
+use reqwest::Url;
 
+use crate::infrastructure::http_client::HttpClient;
+use crate::infrastructure::swarmd_client::SwarmdClient;
 use crate::infrastructure::{Cfg, Indicator};
 
-static USER_AGENT: &str = concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION"),);
+use super::auth::AuthContext;
 
 /// Global Environment for the program execution
 #[derive(Debug, Clone)]
 pub struct Env {
-    pub http_client: Client,
-    pub http_url: Url, // Login data
+    pub http_client: HttpClient,
+    pub http_url: String, // Login data
     // Stack
     indicator: Indicator,
 }
@@ -22,12 +22,8 @@ impl TryFrom<Cfg> for Env {
 
     fn try_from(_value: Cfg) -> Result<Self, Self::Error> {
         Ok(Self {
-            http_client: reqwest::ClientBuilder::new()
-                .timeout(Duration::from_secs(60))
-                .gzip(true)
-                .user_agent(USER_AGENT)
-                .build()?,
-            http_url: "http://127.0.0.1:3000".parse()?,
+            http_client: HttpClient::new(),
+            http_url: "http://127.0.0.1:8087".to_string(),
             indicator: Indicator::new(),
         })
     }
@@ -54,5 +50,18 @@ impl Env {
         format!("http://localhost:3000/sign-up?port={port}")
             .parse()
             .context("Can't parse URL properly with this port")
+    }
+
+    pub fn swarmd_client(&self) -> anyhow::Result<SwarmdClient> {
+        let auth = AuthContext::from_env()?.ok_or(anyhow::anyhow!(
+            "You must login with `swarmd login` before."
+        ))?;
+        let token = auth.token().clone();
+
+        Ok(SwarmdClient::new(
+            self.http_url.to_string(),
+            &self.http_client,
+            token,
+        ))
     }
 }

@@ -7,3 +7,5 @@ pub use config::CliConfig;
 mod login;
 
 mod create;
+
+mod deploy;

@@ -15,6 +15,7 @@ use clap::Args;
 use console::{style, Emoji};
 use indicatif::ProgressBar;
 use instruments::debug;
+use tracing::info;
 
 use crate::{
     domain::{auth::AuthContext, Env},
@@ -55,7 +56,7 @@ impl SwarmdCommand for LoginArg {
 
         let token = get_token_fut.await.context("Couldn't get token")?;
 
-        let auth_ctx = AuthContext::new_from_token(token);
+        let auth_ctx = AuthContext::new_from_token(token)?;
         auth_ctx.save().context("Couldn't save the auth")?;
 
         Ok(())

@@ -1,17 +1,9 @@
 use crate::domain::Env;
+use crate::infrastructure::{NAME, VERSION};
 use async_trait::async_trait;
 use clap::{Parser, Subcommand};
 
-use super::{command::SwarmdCommand, create::CreateArg, login::LoginArg};
-
-const NAME: &str = env!("CARGO_CRATE_NAME");
-const VERSION: &str = concat!(
-    env!("CARGO_PKG_VERSION"),
-    "-",
-    env!("GIT_HASH"),
-    "-",
-    env!("BUILD_DATE")
-);
+use super::{command::SwarmdCommand, create::CreateArg, deploy::DeployArg, login::LoginArg};
 
 #[derive(Parser, Debug)]
 #[command(name = NAME)]
@@ -38,6 +30,8 @@ pub enum Commands {
     Login(LoginArg),
     /// Create a new project
     Create(CreateArg),
+    /// Deploy a Worker
+    Deploy(DeployArg),
 }
 
 #[async_trait]
@@ -47,6 +41,7 @@ impl SwarmdCommand for Commands {
         match self {
             Commands::Login(arg) => arg.execute(env).await,
             Commands::Create(arg) => arg.execute(env).await,
+            Commands::Deploy(arg) => arg.execute(env).await,
         }
     }
 }

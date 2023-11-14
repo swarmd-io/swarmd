@@ -3,20 +3,53 @@ use std::{
     io::{BufReader, BufWriter, Write},
 };
 
-use anyhow::Context;
+use anyhow::{bail, Context};
 
 mod file;
+use base64::{
+    alphabet::URL_SAFE,
+    engine::{
+        general_purpose::URL_SAFE_NO_PAD, DecodePaddingMode, GeneralPurpose, GeneralPurposeConfig,
+    },
+};
+use console::{style, Emoji};
 use file::AuthFile;
+use serde::{Deserialize, Serialize};
+
+mod claims;
+use claims::{Claims, ExtraClaims};
+
+use super::Env;
 
 pub struct AuthContext {
     token: String,
+    pub claims: Claims<ExtraClaims>,
 }
+
+const ENGINE_CONFIG: GeneralPurposeConfig = GeneralPurposeConfig::new()
+    .with_encode_padding(false)
+    .with_decode_padding_mode(DecodePaddingMode::RequireNone)
+    .with_decode_allow_trailing_bits(true);
+
+const ENGINE: GeneralPurpose = GeneralPurpose::new(&URL_SAFE, ENGINE_CONFIG);
 
 const AUTH_FILE: &str = "auth.json";
 
+static WARNING: Emoji<'_, '_> = Emoji("⚠️ ", "");
+
 impl AuthContext {
-    pub fn new_from_token(token: String) -> Self {
-        Self { token }
+    pub fn token(&self) -> &String {
+        &self.token
+    }
+    pub fn new_from_token(token: String) -> anyhow::Result<Self> {
+        let mut parts = token.split('.');
+
+        let header = parts.next().context("Invalid token: no header")?;
+        let mut payload = parts.next().context("Invalid token")?.as_bytes();
+        let payload_r = base64::read::DecoderReader::new(&mut payload, &ENGINE);
+        let claims: Claims<ExtraClaims> = serde_json::from_reader(payload_r)?;
+
+        Ok(Self { token, claims })
     }
 
     pub fn save(self) -> anyhow::Result<()> {
@@ -54,8 +87,37 @@ impl AuthContext {
             Ok(elt) => elt,
         };
 
-        Ok(Some(Self {
-            token: auth_file.token,
-        }))
+        Ok(Some(Self::new_from_token(auth_file.token)?))
+    }
+
+    pub fn auth_cached(env: &Env) -> anyhow::Result<Self> {
+        if let Some(auth) = Self::from_env()? {
+            Ok(auth)
+        } else {
+            env.println(format!(
+                "{} {}You must be authentificated, run `swarmd login`!",
+                style("").red().bold().dim(),
+                WARNING
+            ))?;
+            bail!("You must be logged in.");
+        }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_token_snapshot() {
+        let token_test = "no_header.eyJjbGVya191c2VyX2lkIjoidXNlcl8yWG82c0dQU0JmMlVnS0hOeWRZMnBqVFNncXkiLCJjbGkiOnRydWUsImN1cnJlbnRfb3JnX2NsZXJrX2lkIjpudWxsLCJkZWZhdWx0X29yZyI6Im9yZ18yWG83TDRjbHZPSEp2a0hjSjZ1Y29JTE5JNkMiLCJleHAiOjE2OTk2OTk4ODgsImlhdCI6MTY5OTYxMzQ4OCwiaXNzIjoiaHR0cHM6Ly9ub3JtYWwta2lkLTM4LmNsZXJrLmFjY291bnRzLmRldiIsImp0aSI6ImQ2NTA1ZjkwYTk4OWUwMjg4ODE2IiwibmJmIjoxNjk5NjEzNDgzLCJvcmdfc2x1ZyI6bnVsbCwib3JncyI6eyJvcmdfMlhvN0w0Y2x2T0hKdmtIY0o2dWNvSUxOSTZDIjoiYWRtaW4ifSwic3ViIjoidXNlcl8yWG82c0dQU0JmMlVnS0hOeWRZMnBqVFNncXkiLCJ1c2VyX2lkIjpudWxsfQ.no_signin";
+
+        let mut parts = token_test.split('.');
+
+        let _header = parts.next().context("Invalid token: no header").unwrap();
+        let mut payload = parts.next().context("Invalid token").unwrap().as_bytes();
+        let payload_r = base64::read::DecoderReader::new(&mut payload, &ENGINE);
+        let claims: Claims<ExtraClaims> = serde_json::from_reader(payload_r).unwrap();
+        insta::assert_yaml_snapshot!(claims);
     }
 }

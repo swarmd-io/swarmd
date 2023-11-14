@@ -1,0 +1,19 @@
+---
+source: cli/src/domain/auth/mod.rs
+assertion_line: 100
+expression: claims
+---
+exp: 1699699888
+nbf: 1699613483
+iat: 1699613488
+iss: "https://normal-kid-38.clerk.accounts.dev"
+sub: user_2Xo6sGPSBf2UgKHNydY2pjTSgqy
+jti: d6505f90a989e0288816
+clerk_user_id: user_2Xo6sGPSBf2UgKHNydY2pjTSgqy
+cli: true
+current_org_clerk_id: ~
+default_org: org_2Xo7L4clvOHJvkHcJ6ucoILNI6C
+org_slug: ~
+orgs:
+  org_2Xo7L4clvOHJvkHcJ6ucoILNI6C: admin
+
