@@ -1,10 +1,13 @@
 # swarmd
 ----
 
+**Warning**: Swarmd is still in preview for now, if you want to have early
+access, feel free to drop me a mail at `anthony@swarmd.io`.
+
 This repository host everything related Swarmd Workers.
 
-- (`swarmd`)[./cli/README.md) is the CLI tool desgined to intereact with (swarmd
-workers)[https://swarmd.io].
+- [`swarmd`](./cli/README.md) is the CLI tool desgined to intereact with [swarmd
+workers](https://swarmd.io).
 
 ## Installation
 ---- 
