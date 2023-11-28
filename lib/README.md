@@ -1,8 +1,9 @@
 # Update API from Client
 
+These instructions are not up-to-date.
+TODO: Automate it.
+
 ```
-wget https://api.swarmd.io/docs/private/api.json
-wget http://localhost:8087/docs/private/api.json
-openapi-generator generate -i http://localhost:8087/docs/private/api.json -g rust -o swarmd-generated
+openapi-generator generate -i https://api.swarmd.io/docs/private/api.json -g rust -o swarmd-generated
 rm api.json
 ```
