@@ -3,7 +3,7 @@ use indicatif::{MultiProgress, ProgressBar};
 use reqwest::Url;
 
 use crate::infrastructure::http_client::HttpClient;
-use crate::infrastructure::swarmd_client::SwarmdClient;
+use crate::infrastructure::swarmd_client::{SwarmdClient, SWARMD_URL};
 use crate::infrastructure::{Cfg, Indicator};
 
 use super::auth::AuthContext;
@@ -14,7 +14,7 @@ pub struct Env {
     pub http_client: HttpClient,
     pub http_url: String, // Login data
     // Stack
-    indicator: Indicator,
+    _indicator: Indicator,
 }
 
 impl TryFrom<Cfg> for Env {
@@ -24,7 +24,7 @@ impl TryFrom<Cfg> for Env {
         Ok(Self {
             http_client: HttpClient::new(),
             http_url: "http://127.0.0.1:8087".to_string(),
-            indicator: Indicator::new(),
+            _indicator: Indicator::new(),
         })
     }
 }
@@ -37,17 +37,19 @@ impl Env {
         Ok(())
     }
 
+    #[allow(dead_code)]
     pub fn follow(&self, progress_bar: ProgressBar) -> ProgressBar {
-        self.indicator.follow(progress_bar)
+        self._indicator.follow(progress_bar)
     }
 
+    #[allow(dead_code)]
     pub fn bars(&self) -> &MultiProgress {
-        &self.indicator.bars
+        &self._indicator.bars
     }
 
     /// Get the AuthURL with redirection
     pub fn auth_url_with_local_redirect(&self, port: u16) -> anyhow::Result<Url> {
-        format!("http://localhost:3000/sign-up?port={port}")
+        format!("{SWARMD_URL}/sign-up?port={port}")
             .parse()
             .context("Can't parse URL properly with this port")
     }

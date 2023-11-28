@@ -64,7 +64,7 @@ impl SwarmdCommand for DeployArg {
         let project_id = config.create_project_associated(env, &auth).await?;
 
         let now = Instant::now();
-        let worker_id_uploaded = config.upload_worker(env, &auth, &project_id, &file).await?;
+        let worker_id_uploaded = config.upload_worker(env, &auth, &project_id, file).await?;
 
         let elapsed = now.elapsed();
         env.println(format!(

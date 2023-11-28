@@ -8,3 +8,11 @@ default_job = "check"
 [jobs.check]
 command = ["cargo", "check", "--color", "always", "--tests"]
 need_stdout = false
+
+[jobs.check-lib]
+command = ["cargo", "check", "--color", "always", "--tests", "--lib"]
+need_stdout = false
+
+[jobs.clippy]
+command = ["cargo", "clippy", "--color", "always", "--all"]
+need_stdout = false

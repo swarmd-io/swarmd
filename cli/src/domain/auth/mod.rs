@@ -1,6 +1,6 @@
 use std::{
     fs::{remove_file, File},
-    io::{BufReader, BufWriter, Write},
+    io::{BufReader, BufWriter},
 };
 
 use anyhow::{bail, Context};
@@ -8,13 +8,10 @@ use anyhow::{bail, Context};
 mod file;
 use base64::{
     alphabet::URL_SAFE,
-    engine::{
-        general_purpose::URL_SAFE_NO_PAD, DecodePaddingMode, GeneralPurpose, GeneralPurposeConfig,
-    },
+    engine::{DecodePaddingMode, GeneralPurpose, GeneralPurposeConfig},
 };
 use console::{style, Emoji};
 use file::AuthFile;
-use serde::{Deserialize, Serialize};
 
 mod claims;
 use claims::{Claims, ExtraClaims};
@@ -44,7 +41,7 @@ impl AuthContext {
     pub fn new_from_token(token: String) -> anyhow::Result<Self> {
         let mut parts = token.split('.');
 
-        let header = parts.next().context("Invalid token: no header")?;
+        let _header = parts.next().context("Invalid token: no header")?;
         let mut payload = parts.next().context("Invalid token")?.as_bytes();
         let payload_r = base64::read::DecoderReader::new(&mut payload, &ENGINE);
         let claims: Claims<ExtraClaims> = serde_json::from_reader(payload_r)?;

@@ -2,14 +2,13 @@ use std::path::PathBuf;
 
 use config::Config;
 use console::{style, Emoji};
-use reqwest::RequestBuilder;
 use serde::{Deserialize, Serialize};
 use swarmd_generated::models::{
     CreateProjectPayload, CreateProjectResponse, GetBySlugResponse, PublishWorkerPayload,
-    PublishWorkerResponse, UploadWorkerParams, UploadWorkerResponse,
+    PublishWorkerResponse, UploadWorkerResponse,
 };
 
-use crate::package::npm_rs::{self, NodeEnv, NpmEnv};
+use crate::package::npm_rs::{NodeEnv, NpmEnv};
 use slug_rs::Slug;
 
 use super::{auth::AuthContext, Env};
@@ -25,10 +24,6 @@ pub enum ProfileEnum {
 }
 
 impl ProfileEnum {
-    fn is_prod(&self) -> bool {
-        matches!(self, ProfileEnum::Prod(_))
-    }
-
     fn to_node_env(&self) -> NodeEnv {
         match &self {
             ProfileEnum::Dev(_) => NodeEnv::Development,
@@ -84,9 +79,8 @@ impl WorkerConfig {
         let config = profile.get_config();
         let exit_status = NpmEnv::default()
             .with_node_env(&profile.to_node_env())
-            // .with_env("FOO", "bar")
             .init_env()
-            .raw_append(config.build_command.to_string())
+            .raw_append(&config.build_command)
             .exec()?;
 
         if exit_status.success() {
@@ -98,12 +92,12 @@ impl WorkerConfig {
         }
     }
 
-    pub fn read_dist_sync(&self) -> anyhow::Result<String> {
+    pub fn read_dist_sync(&self) -> anyhow::Result<Vec<u8>> {
         let profile = &self.profile;
         let config = profile.get_config();
         let path = &config.worker_main;
 
-        let file = std::fs::read_to_string(path)?;
+        let file = std::fs::read(path)?;
         Ok(file)
     }
 
@@ -164,7 +158,7 @@ impl WorkerConfig {
         env: &Env,
         auth: &AuthContext,
         project_id: &str,
-        body: &str,
+        body: Vec<u8>,
     ) -> anyhow::Result<String> {
         let org_id = self.organization_id(auth);
 

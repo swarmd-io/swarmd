@@ -2,7 +2,6 @@
 name = "slug-rs"
 version = "0.1.0"
 edition = "2021"
-private = true
 
 [dependencies]
 slug.workspace = true

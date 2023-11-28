@@ -3,14 +3,17 @@ use crate::domain::Env;
 use anyhow::{bail, Context};
 use clap::{Args, ValueEnum};
 use console::{style, Emoji};
-use git2::Repository;
+use git2::{
+    build::{CheckoutBuilder, RepoBuilder},
+    FetchOptions,
+};
 use instruments::debug;
 
 static CREATE: Emoji<'_, '_> = Emoji("📦 ", "");
 static SAVE: Emoji<'_, '_> = Emoji("💾 ", "");
 static OK: Emoji<'_, '_> = Emoji("✅ ", "");
 
-const TYPESCRIPT_TEMPLATE: &str = "https://github.com/Miaxos/github-control.git";
+const SWARMD_TEMPLATE: &str = "https://github.com/swarmd-io/templates.git";
 
 #[derive(ValueEnum, Copy, Clone, Debug, PartialEq, Eq)]
 enum TemplatePossible {
@@ -52,18 +55,29 @@ impl SwarmdCommand for CreateArg {
             style("").bold().dim(),
             SAVE,
             style("Github").green().bold(),
-            style("swarmd-io/typescript-template").magenta(),
+            style("swarmd-io/templates/typescript").magenta(),
         ))?;
 
-        let repo = Repository::clone(TYPESCRIPT_TEMPLATE, &base)
+        let mut checkout = CheckoutBuilder::new();
+        checkout.path("typescript");
+        let mut fetch_option = FetchOptions::new();
+        fetch_option.depth(1);
+
+        let repo = RepoBuilder::new()
+            .bare(false)
+            .branch("main")
+            .fetch_options(fetch_option)
+            .with_checkout(checkout)
+            .clone(SWARMD_TEMPLATE, &base)
             .context("Couldn't clone the templated repository")?;
+
         drop(repo);
 
         let mut git_hidden_repository = base.clone();
         git_hidden_repository.push(".git");
         std::fs::remove_dir_all(git_hidden_repository)?;
 
-        // TODO: Create the config file
+        // TODO(@miaxos): Create the basic config file
 
         env.println(format!(
             "{} {}{} has been {}",

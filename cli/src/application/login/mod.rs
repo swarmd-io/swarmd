@@ -7,7 +7,6 @@
 //!
 //! - Create projects
 //! - Deploy projects
-//!
 use std::time::Duration;
 
 use anyhow::Context;
@@ -15,7 +14,6 @@ use clap::Args;
 use console::{style, Emoji};
 use indicatif::ProgressBar;
 use instruments::debug;
-use tracing::info;
 
 use crate::{
     domain::{auth::AuthContext, Env},
@@ -47,6 +45,9 @@ impl SwarmdCommand for LoginArg {
         let pb = ProgressBar::new_spinner()
             .with_message("Waiting for authentication to be completed...");
         pb.enable_steady_tick(Duration::from_millis(100));
+
+        // TODO(@miaxos): What happens when the port 3001 is taken? Failed.
+        // Should fix this by taking a random port.
 
         let url = env.auth_url_with_local_redirect(3001)?;
         let server = HttpAuthServer::new(3001);

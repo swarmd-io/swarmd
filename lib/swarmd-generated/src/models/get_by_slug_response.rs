@@ -19,6 +19,12 @@ pub struct GetBySlugResponse {
     pub project: Option<Option<Box<crate::models::Project>>>,
 }
 
+impl Default for GetBySlugResponse {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl GetBySlugResponse {
     pub fn new() -> GetBySlugResponse {
         GetBySlugResponse { project: None }

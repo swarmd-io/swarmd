@@ -13,8 +13,6 @@ rustflags = [
     "-Zmacro-backtrace",
     "-Zdebug-macros",
     "-Zthreads=8",
-    "-C",
-    "link-arg=-fuse-ld=mold",
     "--cfg",
     "tokio_unstable"
 ]

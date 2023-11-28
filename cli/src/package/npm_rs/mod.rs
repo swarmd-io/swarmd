@@ -1,4 +1,5 @@
-//! Copy from https://github.com/UpsettingBoy/npm_rs/commit/80d7f99f82fea5bb53947c12575bb8a5834398ae
+#![allow(dead_code)]
+//! Adapted from https://github.com/UpsettingBoy/npm_rs/commit/80d7f99f82fea5bb53947c12575bb8a5834398ae
 //!
 //! This crate provides an abstraction over [`Command`] to use `npm`
 //! in a simple and easy package with fluent API.
@@ -69,7 +70,9 @@ const NPM_RUN: &str = "run";
 /// This enum is used to determine the desired `NODE_ENV` variable value. Its value by [`Default`] is [`NodeEnv::Development`]
 ///
 /// Can be retrieved from Cargo env var `PROFILE` using [`NodeEnv::from_cargo()`](NodeEnv::from_cargo) or created manually.
+#[derive(Default)]
 pub enum NodeEnv {
+    #[default]
     Development,
     Production,
     Custom(String),
@@ -104,12 +107,6 @@ pub struct NpmEnv(Command);
 pub struct Npm {
     cmd: Command,
     args: Vec<String>,
-}
-
-impl Default for NodeEnv {
-    fn default() -> Self {
-        NodeEnv::Development
-    }
 }
 
 impl NodeEnv {

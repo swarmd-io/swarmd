@@ -1,6 +1,6 @@
 ---
 source: cli/src/domain/auth/mod.rs
-assertion_line: 100
+assertion_line: 118
 expression: claims
 ---
 exp: 1699699888

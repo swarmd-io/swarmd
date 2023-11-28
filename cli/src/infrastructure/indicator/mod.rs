@@ -30,6 +30,7 @@ impl Indicator {
         pb
     }
 
+    #[allow(dead_code)]
     pub fn println<I: AsRef<str>>(&self, msg: I) -> std::io::Result<()> {
         self.bars.println(msg)
     }

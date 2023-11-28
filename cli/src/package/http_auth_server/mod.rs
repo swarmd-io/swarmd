@@ -17,7 +17,7 @@ pub struct HttpAuthServer {
     port: u16,
 }
 
-const AUTH_URL: &str = "http://localhost:3000/auth/success";
+const AUTH_URL: &str = "https://swarmd.io/auth/success";
 
 #[derive(Clone)]
 struct HttpAuthState {

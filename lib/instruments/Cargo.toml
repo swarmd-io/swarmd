@@ -12,3 +12,5 @@ default = []
 anyhow.workspace = true
 tracing = { workspace = true, features = ["attributes"] }
 tracing-subscriber = { workspace = true, features = ["registry", "env-filter", "json"] }
+sentry.workspace = true
+sentry-tracing.workspace = true

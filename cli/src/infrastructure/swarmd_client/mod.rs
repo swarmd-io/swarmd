@@ -1,14 +1,10 @@
-use std::time::Duration;
-
-use crate::{
-    domain::auth::AuthContext,
-    infrastructure::{NAME, VERSION},
-};
-use reqwest::{Client, ClientBuilder};
+use crate::infrastructure::{NAME, VERSION};
 
 use swarmd_generated::apis::configuration::{ApiKey, Configuration as SwarmdConfiguration};
 
 use super::http_client::HttpClient;
+
+pub const SWARMD_URL: &str = "https://swarmd.io";
 
 /// Cheap to clone
 #[derive(Debug, Clone)]

@@ -1,4 +1,3 @@
-#![feature(result_option_inspect)]
 #![feature(fs_try_exists)]
 
 mod application;
@@ -17,7 +16,8 @@ use instruments::{debug, Instruments};
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
-    let _instruments = Instruments::new()?;
+    let release_name = release_name!();
+    let _instruments = Instruments::new(release_name)?;
     debug!("Starting the CLI");
 
     debug!("Read configuration");
