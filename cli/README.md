@@ -5,7 +5,7 @@
 
 ## Telemetry
 
-Telemetry is opt-in but you can desactivate it setting this environment
+Telemetry for errors and crash is opt-in but you can desactivate it setting this environment
 variable:
 
 // TODO(@miaxos)
