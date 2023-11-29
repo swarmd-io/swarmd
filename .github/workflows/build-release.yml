@@ -126,8 +126,8 @@ jobs:
       if: matrix.os == 'ubuntu-latest'
       shell: bash
       run: |-
-          apt-get update
-          apt-get install -y openssl ca-certificates pkg-config cmake libssl-dev
+          sudo apt-get update
+          sudo apt-get install -y openssl ca-certificates pkg-config cmake libssl-dev
 
     - name: Install Rust
       uses: dtolnay/rust-toolchain@master
