@@ -38,8 +38,7 @@ tower-http = { version = "0.4", features = ["trace"] }
 tokio = { workspace = true, features = ["macros", "rt-multi-thread", "signal"] }
 tokio-util = { workspace = true, features = ["io"] }
 
-# openssl = { version = "0.10", features = ["vendored"] } 
-xdg = "2"
+directories = "5"
 git2 = { version = "0.18", features = ["vendored-libgit2"] }
 cfg-if = "1"
 serde_with = "3"
@@ -63,6 +62,9 @@ url = { version = "2", features = ["serde"] }
 urlencoding = "2.1.2"
 axum = "0.6.12"
 webbrowser = "0.8.8"
+
+[target.'cfg(not(any(target_os = "macos", target_os = "windows")))'.dependencies]
+openssl = { version = "0.10", features = ["vendored"] } 
 
 [dev-dependencies]
 insta.workspace = true

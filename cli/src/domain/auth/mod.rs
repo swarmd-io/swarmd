@@ -50,10 +50,12 @@ impl AuthContext {
     }
 
     pub fn save(self) -> anyhow::Result<()> {
-        let base =
+        let project_dir =
             crate::infrastructure::fs::base_directory().context("Couln't load base directory")?;
 
-        let path = base.place_state_file(AUTH_FILE)?;
+        let local_dir = project_dir.data_local_dir();
+
+        let path = local_dir.join(AUTH_FILE);
         let auth_file = File::create(path)?;
         let writer = BufWriter::new(auth_file);
         let auth = AuthFile { token: self.token };
@@ -64,13 +66,12 @@ impl AuthContext {
     /// Load AuthContext from environment by loading the associated token through the associated
     /// file.
     pub fn from_env() -> anyhow::Result<Option<Self>> {
-        let base =
+        let project_dir =
             crate::infrastructure::fs::base_directory().context("Couln't load base directory")?;
 
-        let file_path = match base.find_state_file(AUTH_FILE) {
-            None => return Ok(None),
-            Some(file) => file,
-        };
+        let local_dir = project_dir.data_local_dir();
+
+        let file_path = local_dir.join(AUTH_FILE);
 
         let file_opened = File::open(file_path.clone()).context("Couldn't open file")?;
         let reader = BufReader::new(file_opened);
