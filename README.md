@@ -12,20 +12,21 @@
 **Warning**: Swarmd is still in preview for now, if you want to have early
 access, feel free to drop me a mail at `anthony@swarmd.io`.
 
-This repository host everything related Swarmd Workers.
+This repository host everything related [Swarmd Workers](https://swarmd.io).
 
 - [`swarmd`](./cli/README.md) is the CLI tool desgined to intereact with [swarmd
 workers](https://swarmd.io).
 
-## Release
-
-We do use [release-plz](https://github.com/MarcoIeni/release-plz) to handle
-release.
-
 ## Installation
 ---- 
 
-### Development
+### Install with Cargo
+
+```bash
+cargo install swarmd --locked
+```
+
+## Development
 
 You can build the development version in the repo by running
 
@@ -38,3 +39,9 @@ cargo install --path cli/.
 ```bash
 cargo install swarmd
 ```
+
+## Release
+
+We do use [release-plz](https://github.com/MarcoIeni/release-plz) to handle
+release.
+
