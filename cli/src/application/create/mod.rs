@@ -7,7 +7,7 @@ use git2::{
     build::{CheckoutBuilder, RepoBuilder},
     FetchOptions,
 };
-use instruments::debug;
+use swarmd_instruments::debug;
 
 static CREATE: Emoji<'_, '_> = Emoji("📦 ", "");
 static SAVE: Emoji<'_, '_> = Emoji("💾 ", "");

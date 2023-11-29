@@ -1,5 +1,5 @@
 [package]
-name = "slug-rs"
+name = "swarmd_slug-rs"
 version = "0.1.0"
 edition = "2021"
 

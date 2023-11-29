@@ -1,5 +1,5 @@
 [package]
-name = "swarmd-generated"
+name = "swarmd_generated"
 version = "0.0.1"
 authors = ["anthony@brevz.io"]
 description = "# Introduction  blblbllb "

@@ -12,7 +12,7 @@ use infrastructure::Cfg;
 
 mod package;
 
-use instruments::{debug, Instruments};
+use swarmd_instruments::{debug, Instruments};
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {

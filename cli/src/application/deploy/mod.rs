@@ -2,7 +2,7 @@ use crate::domain::{auth::AuthContext, worker_config::WorkerConfig, Env};
 use anyhow::Context;
 use clap::Args;
 use console::{style, Emoji};
-use instruments::debug;
+use swarmd_instruments::debug;
 use tokio::time::Instant;
 
 use super::command::SwarmdCommand;

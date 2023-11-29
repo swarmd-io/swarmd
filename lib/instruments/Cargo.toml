@@ -1,5 +1,5 @@
 [package]
-name = "instruments"
+name = "swarmd_instruments"
 version = "0.1.0"
 edition = "2021"
 description = "Declarative instrumentation"
