@@ -26,6 +26,26 @@ workers](https://swarmd.io).
 cargo install swarmd --locked
 ```
 
+## Getting started
+----
+
+Once you have swarmd, it'll be quite easy for you to deploy your first Swarmd worker!
+
+### Create your Swarmd Worker
+
+```bash
+swarmd login
+swarmd create --template typescript demo_worker
+```
+
+### Configure it
+
+### Deploy it!
+
+```bash
+swarmd deploy
+```
+
 ## Development
 
 You can build the development version in the repo by running

@@ -199,10 +199,9 @@ jobs:
       shell: bash
       run: |
         mkdir -p "$ARCHIVE"/{complete,doc}
-        ls
         cp "$BIN" "$ARCHIVE"/
-        cp {README.md} "$ARCHIVE"/
-        # cp {cli/CHANGELOG.md} "$ARCHIVE"/doc/
+        cp cli/README.md "$ARCHIVE"/
+        cp cli/CHANGELOG.md "$ARCHIVE"/doc/
 
 #   - name: Generate man page and completions (no emulation)
 #     if: matrix.qemu == ''
