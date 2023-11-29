@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.1](https://github.com/swarmd-io/swarmd/compare/swarmd_instruments-v0.1.0...swarmd_instruments-v0.1.1) - 2023-11-29
+
+### Other
+- change todo to test release workflow
+- release
+
 ## [0.1.0](https://github.com/swarmd-io/swarmd/releases/tag/swarmd_instruments-v0.1.0) - 2023-11-29
 
 ### Added
