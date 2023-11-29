@@ -88,9 +88,9 @@ async fn token<'a>(
     info!("Token received.");
     let token = &query.token;
 
-    let _ = state.token_tx.try_send(token.clone()).inspect_err(|err| {
+    if let Err(err) = state.token_tx.try_send(token.clone()) {
         tracing::error!("{err:?}");
-    });
+    }
 
-    Redirect::temporary(&format!("{AUTH_URL}"))
+    Redirect::temporary(AUTH_URL)
 }

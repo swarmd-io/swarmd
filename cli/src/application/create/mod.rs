@@ -46,7 +46,7 @@ impl SwarmdCommand for CreateArg {
         let mut base = std::env::current_dir().context("Couldn't read current directory")?;
         base.push(&self.name);
 
-        if let Ok(true) = std::fs::try_exists(&base) {
+        if std::fs::metadata(&base).is_ok() {
             bail!("A file or folder already exist at the given path.");
         }
 

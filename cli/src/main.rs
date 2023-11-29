@@ -1,5 +1,3 @@
-#![feature(fs_try_exists)]
-
 mod application;
 mod domain;
 mod infrastructure;
