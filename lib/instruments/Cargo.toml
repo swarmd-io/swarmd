@@ -6,7 +6,7 @@ homepage = "https://swarmd.io"
 repository = "https://github.com/swarmd_io/swarmd"
 documentation = "https://docs.swarmd.io"
 license = "MIT"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2021"
 
 [features]
