@@ -1,6 +1,13 @@
 # swarmd
 ----
 
+<p align="center">
+  <a href="https://swarmd.io">
+    <img src="https://swarmd.io/swarmd.svg" height="128" width="128">
+    <h3 align="center">Swarmd</h3>
+  </a>
+</p>
+
 **Warning**: Swarmd is still in preview for now, if you want to have early
 access, feel free to drop me a mail at `anthony@swarmd.io`.
 
