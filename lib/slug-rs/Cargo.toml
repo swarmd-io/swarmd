@@ -12,5 +12,5 @@ edition = "2021"
 [dependencies]
 slug.workspace = true
 schemars.workspace = true
-serde.worksapce = true
+serde.workspace = true
 thiserror.workspace = true
