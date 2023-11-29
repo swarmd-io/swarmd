@@ -6,7 +6,7 @@ name: release
 on:
   push:
     tags:
-    - /swarmd-v\d+\.\d+\.\d+.*$/
+    - /^swarmd-v\d+\.\d+\.\d+.*$/
 
 # We need this to be able to create releases.
 permissions:
