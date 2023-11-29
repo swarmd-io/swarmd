@@ -2527,7 +2527,7 @@ dependencies = [
 
 [[package]]
 name = "swarmd_generated"
-version = "0.0.1"
+version = "0.1.0"
 dependencies = [
  "reqwest",
  "serde",
