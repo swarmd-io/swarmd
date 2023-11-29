@@ -35,10 +35,13 @@ jobs:
             echo "version does not match Cargo.toml" >&2
             exit 1
           fi
-#     - name: Create GitHub release
-#       env:
-#         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#       run: gh release create $VERSION --draft --verify-tag --title $VERSION
+      # TODO(@miaxos): When we have a way to specify tag name for one of the
+      # subpckage let's do it directly.
+      # https://github.com/MarcoIeni/release-plz/issues/680
+      - name: Create GitHub release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release create $VERSION --draft --verify-tag --title $VERSION
     outputs:
       version: ${{ env.VERSION }}
       release_name: ${{ env.RELEASE_NAME }}
@@ -271,7 +274,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       shell: bash
       run: |
-        release_name="${{ needs.create-release.outputs.release_name }}"
+        release_name="${{ needs.create-release.outputs.version }}"
         gh release upload "$release_name" ${{ env.ASSET }} ${{ env.ASSET_SUM }}
 
 # build-release-deb:

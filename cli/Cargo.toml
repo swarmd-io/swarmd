@@ -45,6 +45,8 @@ serde_with = "3"
 swarmd_slug-rs.workspace = true
 swarmd_generated.workspace = true
 
+self_update = "0.39"
+
 # Log stack
 swarmd_instruments.workspace = true
 tracing = { version = "0.1", features = ["max_level_trace", "release_max_level_debug"] }
