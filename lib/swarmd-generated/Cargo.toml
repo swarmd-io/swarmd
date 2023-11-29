@@ -1,6 +1,6 @@
 [package]
 name = "swarmd_generated"
-version = "0.1.0"
+version = "0.1.1-alpha.1"
 authors = ["anthony@brevz.io"]
 description = "# Introduction  blblbllb "
 homepage = "https://swarmd.io"
