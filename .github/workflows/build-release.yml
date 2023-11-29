@@ -2,11 +2,11 @@
 #
 name: release
 
-# Only do the release on x.y.z tags.
+# Only do the release on swarmd-vx.y.z tags.
 on:
   push:
     tags:
-    - /^swarmd-v\d+\.\d+\.\d+.*$/
+    - "swarmd-v[0-9]+.[0-9]+.[0-9]+"
 
 # We need this to be able to create releases.
 permissions:

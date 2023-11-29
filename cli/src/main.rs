@@ -19,8 +19,6 @@ async fn main() -> anyhow::Result<()> {
     let release_name = release_name!();
     let _instruments = Instruments::new(release_name)?;
     debug!("Starting the CLI");
-    // TODO: Remove it
-    debug!("Starting the CLI");
 
     debug!("Read configuration");
     let cfg = Cfg::from_env()?;
