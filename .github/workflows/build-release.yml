@@ -21,7 +21,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Get the release version from the tag
         if: env.VERSION == ''
-        run: echo "${{ github.ref_name }}" | sed -En 's/^swarmd-v(.*)$/VERSION=v\1/p' >> $GITHUB_ENV
+        run: echo "${{ github.ref_name }}" | sed -En 's/^swarmd-v(.*)$/VERSION=\1/p' >> $GITHUB_ENV
       - name: Get the swarmd release version from the tag
         if: env.RELEASE_NAME == ''
         run: echo "RELEASE_NAME=${{ github.ref_name }}" >> $GITHUB_ENV
@@ -42,7 +42,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         # run: gh release create $VERSION --draft --verify-tag --title $VERSION
-        run: gh release create $VERSION --draft --title $VERSION
+        run: gh release create v$VERSION --draft --title v$VERSION
     outputs:
       version: ${{ env.VERSION }}
       release_name: ${{ env.RELEASE_NAME }}
@@ -275,7 +275,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       shell: bash
       run: |
-        release_name="${{ needs.create-release.outputs.version }}"
+        release_name="v${{ needs.create-release.outputs.version }}"
         gh release upload "$release_name" ${{ env.ASSET }} ${{ env.ASSET_SUM }}
 
 # build-release-deb:
