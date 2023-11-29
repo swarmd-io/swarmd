@@ -37,7 +37,7 @@ serde_json = "1"
 
 # Internal
 swarmd_instruments = { path = "./lib/instruments" }
-swarmd_generated = { path = "./lib/swarmd-generated" }
+swarmd_generated = "0.1.1-alpha.2"
 swarmd_slug-rs = { path = "./lib/slug-rs" }
 
 [profile.dev]

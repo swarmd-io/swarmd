@@ -2506,7 +2506,7 @@ dependencies = [
  "serde",
  "serde_json",
  "serde_with 3.4.0",
- "swarmd_generated",
+ "swarmd_generated 0.1.1-alpha.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "swarmd_instruments",
  "swarmd_slug-rs",
  "thiserror",
@@ -2528,6 +2528,21 @@ dependencies = [
 [[package]]
 name = "swarmd_generated"
 version = "0.1.1-alpha.2"
+dependencies = [
+ "reqwest",
+ "serde",
+ "serde_derive",
+ "serde_json",
+ "serde_with 2.3.3",
+ "url",
+ "uuid",
+]
+
+[[package]]
+name = "swarmd_generated"
+version = "0.1.1-alpha.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "80379c35b0bbba3582ca4cd40ecccc1addcb072687aa0fab6d3208447eb6e0bf"
 dependencies = [
  "reqwest",
  "serde",
