@@ -31,7 +31,7 @@ jobs:
       - name: Check that tag version and Cargo.toml version are the same
         shell: bash
         run: |
-          if ! grep -q "version = \"$VERSION\"" Cargo.toml; then
+          if ! grep -q "version = \"$VERSION\"" cli/Cargo.toml; then
             echo "version does not match Cargo.toml" >&2
             exit 1
           fi
@@ -160,11 +160,11 @@ jobs:
     - name: Build release binary
       shell: bash
       run: |
-        ${{ env.CARGO }} build --verbose --release --features pcre2 ${{ env.TARGET_FLAGS }}
+        ${{ env.CARGO }} build --bin swarmd --verbose --release ${{ env.TARGET_FLAGS }}
         if [ "${{ matrix.os }}" = "windows-latest" ]; then
-          bin="target/${{ matrix.target }}/release/rg.exe"
+          bin="target/${{ matrix.target }}/release/swarmd.exe"
         else
-          bin="target/${{ matrix.target }}/release/rg"
+          bin="target/${{ matrix.target }}/release/swarmd"
         fi
         echo "BIN=$bin" >> $GITHUB_ENV
 
@@ -181,7 +181,7 @@ jobs:
           "$PWD/target:/target:Z" \
           "rustembedded/cross:${{ matrix.target }}" \
           "${{ matrix.strip }}" \
-          "/target/${{ matrix.target }}/release/rg"
+          "/target/${{ matrix.target }}/release/swarmd"
 
     - name: Determine archive name
       shell: bash

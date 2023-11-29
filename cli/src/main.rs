@@ -18,6 +18,7 @@ use swarmd_instruments::{debug, Instruments};
 async fn main() -> anyhow::Result<()> {
     let release_name = release_name!();
     let _instruments = Instruments::new(release_name)?;
+
     debug!("Starting the CLI");
 
     debug!("Read configuration");
