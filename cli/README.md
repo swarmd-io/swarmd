@@ -8,7 +8,6 @@
 Telemetry for errors and crash is opt-in but you can desactivate it setting this environment
 variable:
 
-// TODO(@miaxos)
 ```bash
 SWARMD_TELEMETRY_LEVEL=0
 ```
