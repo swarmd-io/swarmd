@@ -14,6 +14,8 @@ mod package;
 
 use swarmd_instruments::{debug, Instruments};
 
+// TODO: Add man
+
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
     let release_name = release_name!();
