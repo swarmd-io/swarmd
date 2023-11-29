@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.2](https://github.com/swarmd-io/swarmd/compare/swarmd-v0.1.1...swarmd-v0.1.2) - 2023-11-29
+
+### Other
+- remove ci from trust and try the same behavior as ripgrep
+
 ## [0.1.1](https://github.com/swarmd-io/swarmd/compare/swarmd-v0.1.0...swarmd-v0.1.1) - 2023-11-29
 
 ### Other
