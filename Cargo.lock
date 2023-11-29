@@ -1169,17 +1169,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "instruments"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "sentry",
- "sentry-tracing",
- "tracing",
- "tracing-subscriber",
-]
-
-[[package]]
 name = "iovec"
 version = "0.1.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2446,16 +2435,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "slug-rs"
-version = "0.1.0"
-dependencies = [
- "schemars",
- "serde",
- "slug",
- "thiserror",
-]
-
-[[package]]
 name = "smallvec"
 version = "0.6.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2522,14 +2501,14 @@ dependencies = [
  "git2",
  "indicatif",
  "insta",
- "instruments",
  "once_cell",
  "reqwest",
  "serde",
  "serde_json",
  "serde_with 3.4.0",
- "slug-rs",
- "swarmd-generated",
+ "swarmd_generated 0.1.1-alpha.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "swarmd_instruments",
+ "swarmd_slug-rs",
  "thiserror",
  "tokio 1.33.0",
  "tokio-util",
@@ -2547,8 +2526,8 @@ dependencies = [
 ]
 
 [[package]]
-name = "swarmd-generated"
-version = "0.0.1"
+name = "swarmd_generated"
+version = "0.1.1-alpha.2"
 dependencies = [
  "reqwest",
  "serde",
@@ -2557,6 +2536,42 @@ dependencies = [
  "serde_with 2.3.3",
  "url",
  "uuid",
+]
+
+[[package]]
+name = "swarmd_generated"
+version = "0.1.1-alpha.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "80379c35b0bbba3582ca4cd40ecccc1addcb072687aa0fab6d3208447eb6e0bf"
+dependencies = [
+ "reqwest",
+ "serde",
+ "serde_derive",
+ "serde_json",
+ "serde_with 2.3.3",
+ "url",
+ "uuid",
+]
+
+[[package]]
+name = "swarmd_instruments"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "sentry",
+ "sentry-tracing",
+ "tracing",
+ "tracing-subscriber",
+]
+
+[[package]]
+name = "swarmd_slug-rs"
+version = "0.1.1-alpha.2"
+dependencies = [
+ "schemars",
+ "serde",
+ "slug",
+ "thiserror",
 ]
 
 [[package]]

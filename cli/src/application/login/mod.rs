@@ -13,7 +13,7 @@ use anyhow::Context;
 use clap::Args;
 use console::{style, Emoji};
 use indicatif::ProgressBar;
-use instruments::debug;
+use swarmd_instruments::debug;
 
 use crate::{
     domain::{auth::AuthContext, Env},

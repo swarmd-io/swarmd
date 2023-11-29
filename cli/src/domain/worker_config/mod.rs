@@ -9,7 +9,7 @@ use swarmd_generated::models::{
 };
 
 use crate::package::npm_rs::{NodeEnv, NpmEnv};
-use slug_rs::Slug;
+use swarmd_slug_rs::Slug;
 
 use super::{auth::AuthContext, Env};
 

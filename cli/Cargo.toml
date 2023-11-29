@@ -3,6 +3,18 @@ name = "swarmd"
 version = "0.1.0"
 edition = "2021"
 description = "Swarmd CLI"
+authors = ["Swarmd Team"]
+homepage = "https://swarmd.io"
+repository = "https://github.com/swarmd_io/swarmd"
+documentation = "https://docs.swarmd.io"
+license = "MIT"
+keywords = ["worker", "cli", "typescript", "javascript"]
+categories = ["command-line-utilities"]
+
+[[bin]]
+name = "swarmd"
+path = "./src/main.rs"
+doc = false
 
 [features]
 default = []
@@ -30,11 +42,11 @@ xdg = "2"
 git2 = "0.18"
 cfg-if = "1"
 serde_with = "3"
-slug-rs.workspace = true
-swarmd-generated.workspace = true
+swarmd_slug-rs.workspace = true
+swarmd_generated.workspace = true
 
 # Log stack
-instruments.workspace = true
+swarmd_instruments.workspace = true
 tracing = { version = "0.1", features = ["max_level_trace", "release_max_level_debug"] }
 tracing-core = "0.1"
 tracing-futures = { version = "0.2", features = ["tokio"] }
