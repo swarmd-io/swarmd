@@ -13,9 +13,9 @@ pub struct Instruments {
 impl Instruments {
     /// Create a new `Instruments` stack and register it globally.
     pub fn new(release_name: Option<Cow<'static, str>>) -> anyhow::Result<Self> {
+        // NOTE(@miaxos): The dsn here is linked to swarmd-cli, if we have another bin, we should move that
+        // part to be an argument.
         let guard = sentry::init(sentry::ClientOptions {
-            // NOTE(@miaxos): The dsn here is linked to swarmd-cli, if we have another bin, we should move that
-            // part to be an argument.
             dsn: Some(Dsn::from_str("https://3ca89d7f605a902ddd39375c2a5b1509@o4506304538345472.ingest.sentry.io/4506304540311552")?),
             debug: false,
             release: release_name,
