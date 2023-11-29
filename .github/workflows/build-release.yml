@@ -6,7 +6,7 @@ name: release
 on:
   push:
     tags:
-    - /swarmd-^v\d+\.\d+\.\d+.*$/
+    - /swarmd-v\d+\.\d+\.\d+.*$/
 
 # We need this to be able to create releases.
 permissions:
@@ -31,10 +31,10 @@ jobs:
             echo "version does not match Cargo.toml" >&2
             exit 1
           fi
-      - name: Create GitHub release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh release create $VERSION --draft --verify-tag --title $VERSION
+#     - name: Create GitHub release
+#       env:
+#         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#       run: gh release create $VERSION --draft --verify-tag --title $VERSION
     outputs:
       version: ${{ env.VERSION }}
 
