@@ -21,6 +21,7 @@ async fn main() -> anyhow::Result<()> {
     debug!("Starting the CLI");
     // TODO: Remove it
     //
+    //
     debug!("Starting the CLI");
 
     debug!("Read configuration");
