@@ -38,9 +38,9 @@ tower-http = { version = "0.4", features = ["trace"] }
 tokio = { workspace = true, features = ["macros", "rt-multi-thread", "signal"] }
 tokio-util = { workspace = true, features = ["io"] }
 
-openssl = { version = "0.10", features = ["vendored"] } 
+# openssl = { version = "0.10", features = ["vendored"] } 
 xdg = "2"
-git2 = "0.18"
+git2 = { version = "0.18", features = ["vendored-libgit2"] }
 cfg-if = "1"
 serde_with = "3"
 swarmd_slug-rs.workspace = true

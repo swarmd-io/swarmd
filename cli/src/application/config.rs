@@ -3,13 +3,14 @@ use crate::infrastructure::{NAME, VERSION};
 use async_trait::async_trait;
 use clap::{Parser, Subcommand};
 
+use super::update::UpdateArg;
 use super::{command::SwarmdCommand, create::CreateArg, deploy::DeployArg, login::LoginArg};
 
 #[derive(Parser, Debug)]
 #[command(name = NAME)]
-#[command(author = "Anthony G. <anthony@swarmd.io>")]
+#[command(author = "Swarmd Team <support@swarmd.io>")]
 #[command(version = VERSION)]
-#[command(about = "Swarmd CLI allow you to interact with the Swarmd ecosystem to deploy workers through the Swarmd's EdgeNetwork.", long_about = None)]
+#[command(about = "Swarmd CLI allow you to interact with the Swarmd ecosystem to deploy workers through the Swarmd's Network.", long_about = None)]
 pub struct CliConfig {
     #[command(subcommand)]
     command: Commands,
@@ -32,6 +33,8 @@ pub enum Commands {
     Create(CreateArg),
     /// Deploy a Worker
     Deploy(DeployArg),
+    /// Update the Swarmd Cli
+    Update(UpdateArg),
 }
 
 #[async_trait]
@@ -42,6 +45,7 @@ impl SwarmdCommand for Commands {
             Commands::Login(arg) => arg.execute(env).await,
             Commands::Create(arg) => arg.execute(env).await,
             Commands::Deploy(arg) => arg.execute(env).await,
+            Commands::Update(arg) => arg.execute(env).await,
         }
     }
 }
