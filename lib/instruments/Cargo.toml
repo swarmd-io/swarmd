@@ -1,9 +1,13 @@
 [package]
 name = "swarmd_instruments"
+description = "Declarative instrumentation"
+authors = ["Swarmd Team"]
+homepage = "https://swarmd.io"
+repository = "https://github.com/swarmd_io/swarmd"
+documentation = "https://docs.swarmd.io"
+license = "MIT"
 version = "0.1.0"
 edition = "2021"
-description = "Declarative instrumentation"
-private = true
 
 [features]
 default = []
