@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.2](https://github.com/swarmd-io/swarmd/compare/swarmd_instruments-v0.1.1...swarmd_instruments-v0.1.2) - 2023-11-29
+
+### Added
+- add a way to disable sentry
+
 ## [0.1.1](https://github.com/swarmd-io/swarmd/compare/swarmd_instruments-v0.1.0...swarmd_instruments-v0.1.1) - 2023-11-29
 
 ### Other
