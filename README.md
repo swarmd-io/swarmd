@@ -9,9 +9,10 @@ This repository host everything related Swarmd Workers.
 - [`swarmd`](./cli/README.md) is the CLI tool desgined to intereact with [swarmd
 workers](https://swarmd.io).
 
-## Covector
+## Release
 
-We do use covector to handle our release.
+We do use [release-plz](https://github.com/MarcoIeni/release-plz) to handle
+release.
 
 ## Installation
 ---- 
