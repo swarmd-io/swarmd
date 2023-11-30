@@ -45,7 +45,7 @@ serde_with = "3"
 swarmd_slug-rs.workspace = true
 swarmd_generated.workspace = true
 
-self_update = "0.39"
+self_update = { version = "0.39", features = ["archive-tar", "compression-flate2"] }
 
 # Log stack
 swarmd_instruments.workspace = true

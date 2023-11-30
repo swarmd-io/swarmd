@@ -1,6 +1,9 @@
+use std::env::current_dir;
+
 use crate::domain::Env;
 use clap::Args;
 use console::{style, Emoji};
+use self_update::get_target;
 use tokio::task::spawn_blocking;
 
 use super::SwarmdCommand;
@@ -22,20 +25,42 @@ impl SwarmdCommand for UpdateArg {
             style("").bold().dim(),
             DELIVERY
         ))?;
-        let _ = spawn_blocking(|| {
-            let status = self_update::backends::github::Update::configure()
+        let status = spawn_blocking(|| {
+            let release = self_update::backends::github::Update::configure()
                 .repo_owner("swarmd-io")
                 .repo_name("swarmd")
                 .bin_name("swarmd")
-                .show_download_progress(true)
-                .current_version("swarmd-v.0.1.9")
+                .current_version(self_update::cargo_crate_version!())
+                .build()?
+                .get_latest_release()?;
+
+            let last_version = release.version;
+            let target = get_target();
+            let bin_path = format!("swarmd-v{last_version}-{target}/swarmd");
+
+            let status = self_update::backends::github::Update::configure()
+                .repo_owner("swarmd-io")
+                .repo_name("swarmd")
+                .bin_path_in_archive(&bin_path)
+                .bin_name("swarmd")
+                .show_download_progress(false)
+                .current_version(self_update::cargo_crate_version!())
+                .show_output(false)
+                .no_confirm(true)
+                .bin_install_path(current_dir().unwrap())
                 .build()?
                 .update()?;
 
-            println!("Update status: `{:?}`!", status);
-            Ok::<_, anyhow::Error>(())
+            Ok::<_, anyhow::Error>(status)
         })
-        .await;
+        .await??;
+
+        env.println(format!(
+            "{} {}New version `{}` installed",
+            style("").bold().dim(),
+            DELIVERY,
+            style(status.version()).bold().cyan(),
+        ))?;
 
         Ok(())
     }

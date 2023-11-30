@@ -10,6 +10,8 @@ pub mod http_client;
 
 pub mod swarmd_client;
 
+pub mod updater;
+
 pub const NAME: &str = env!("CARGO_CRATE_NAME");
 pub const VERSION: &str = concat!(
     env!("CARGO_PKG_VERSION"),
