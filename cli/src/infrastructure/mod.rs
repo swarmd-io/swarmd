@@ -13,6 +13,8 @@ pub mod swarmd_client;
 pub mod updater;
 
 pub const NAME: &str = env!("CARGO_CRATE_NAME");
+
+#[cfg(debug_assertions)]
 pub const VERSION: &str = concat!(
     env!("CARGO_PKG_VERSION"),
     "-",
@@ -20,3 +22,6 @@ pub const VERSION: &str = concat!(
     "-",
     env!("BUILD_DATE")
 );
+
+#[cfg(not(debug_assertions))]
+pub const VERSION: &str = env!("CARGO_PKG_VERSION");
