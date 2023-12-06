@@ -19,12 +19,16 @@ doc = false
 [features]
 default = []
 
+[build-dependencies]
+chrono = "0.4"
+
 [dependencies]
 anyhow.workspace = true
 async-trait.workspace = true
 async-stream.workspace = true
 base64.workspace = true
 clap = { workspace = true, features = ["derive"] }
+chrono = "0.4"
 config.workspace = true
 derivative.workspace = true
 derive_builder.workspace = true
