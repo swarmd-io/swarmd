@@ -6,11 +6,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.1.11](https://github.com/swarmd-io/swarmd/compare/swarmd-v0.1.10...swarmd-v0.1.11) - 2023-11-29
-
-### Other
-- update dependencies
-
 ## [0.1.10](https://github.com/swarmd-io/swarmd/compare/swarmd-v0.1.9...swarmd-v0.1.10) - 2023-11-29
 
 ### Other
