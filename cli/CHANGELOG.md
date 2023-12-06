@@ -6,6 +6,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.10](https://github.com/swarmd-io/swarmd/compare/swarmd-v0.1.9...swarmd-v0.1.10) - 2023-12-06
+
+### Added
+- add dev command & local runtime
+- add update mechanism
+- draft to have an update command
+- remove xdg and use directories to solve build issues
+
+### Fixed
+- try to remove openssl shit
+- use openssl vendored
+
+### Other
+- remove 0.10
+- fix ci release
+- Merge pull request [#16](https://github.com/swarmd-io/swarmd/pull/16) from swarmd-io/release-plz-2023-11-29T18-21-49Z
+- update release
+- fix stable release
+- release
+- this time for sure
+
 ## [0.1.9](https://github.com/swarmd-io/swarmd/compare/swarmd-v0.1.8...swarmd-v0.1.9) - 2023-11-29
 
 ### Other
