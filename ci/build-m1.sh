@@ -18,7 +18,7 @@ fi
 target=aarch64-apple-darwin
 OPENSSL_STATIC=1 cargo build --bin swarmd --release --target $target
 BIN=target/$target/release/swarmd
-NAME=swarmd-$version-$target
+NAME=swarmd-$target
 ARCHIVE="deployment/m1/$NAME"
 
 mkdir -p "$ARCHIVE"/doc
