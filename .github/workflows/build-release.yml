@@ -67,6 +67,8 @@ jobs:
       RUST_BACKTRACE: 1
       # Build static releases with PCRE2.
       PCRE2_SYS_STATIC: 1
+      # To ensure openssl is static linked
+      OPENSSL_STATIC: 1
     strategy:
       fail-fast: false
       matrix:
@@ -79,7 +81,7 @@ jobs:
         - build: stable-x86
           os: ubuntu-latest
           rust: stable
-          target: i686-unknown-linux-gnu
+          target: x86_64-unknown-linux-gnu
           strip: x86_64-linux-gnu-strip
           qemu: i386
         - build: stable-aarch64
@@ -109,13 +111,9 @@ jobs:
           rust: nightly
           target: x86_64-pc-windows-msvc
         - build: win-gnu
-          os: windows-latest
+          os: windows-2022
           rust: nightly-x86_64-gnu
           target: x86_64-pc-windows-gnu
-        - build: win32-msvc
-          os: windows-latest
-          rust: nightly
-          target: i686-pc-windows-msvc
 
     steps:
     - name: Checkout repository
@@ -170,7 +168,7 @@ jobs:
     - name: Build release binary
       shell: bash
       run: |
-        OPENSSL_STATIC=1 ${{ env.CARGO }} build --bin swarmd --verbose --release ${{ env.TARGET_FLAGS }}
+        ${{ env.CARGO }} build --bin swarmd --verbose --release ${{ env.TARGET_FLAGS }}
         if [ "${{ matrix.os }}" = "windows-latest" ]; then
           bin="target/${{ matrix.target }}/release/swarmd.exe"
         else
