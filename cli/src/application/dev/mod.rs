@@ -28,7 +28,12 @@ impl SwarmdCommand for DevArg {
             DELIVERY
         ))?;
         env.println(format!(
-            "{} {}The dev server will not reload itself each time you build your project again.",
+            "{} {}The dev server will not reload itself each time you build your project again...",
+            style("").bold().dim(),
+            DELIVERY
+        ))?;
+        env.println(format!(
+            "{} {}Feel free to CTRL-C to stop the actual server...",
             style("").bold().dim(),
             DELIVERY
         ))?;
