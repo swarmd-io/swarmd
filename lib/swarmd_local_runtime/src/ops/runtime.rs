@@ -15,7 +15,7 @@ deno_core::extension!(
 #[op2]
 #[string]
 fn op_main_module(state: &mut OpState) -> Result<String, AnyError> {
-  let main_url = state.borrow::<ModuleSpecifier>();
-  let main_path = main_url.to_string();
-  Ok(main_path)
+    let main_url = state.borrow::<ModuleSpecifier>();
+    let main_path = main_url.to_string();
+    Ok(main_path)
 }
