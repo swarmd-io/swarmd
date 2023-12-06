@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.13](https://github.com/swarmd-io/swarmd/compare/swarmd-v0.1.12...swarmd-v0.1.13) - 2023-12-06
+
+### Added
+- add install script
+
+### Fixed
+- create directory if it doesn't exist
+
 ## [0.1.12](https://github.com/swarmd-io/swarmd/compare/swarmd-v0.1.11...swarmd-v0.1.12) - 2023-12-06
 
 ### Fixed
