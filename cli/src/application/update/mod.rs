@@ -26,17 +26,8 @@ impl SwarmdCommand for UpdateArg {
             DELIVERY
         ))?;
         let status = spawn_blocking(|| {
-            let release = self_update::backends::github::Update::configure()
-                .repo_owner("swarmd-io")
-                .repo_name("swarmd")
-                .bin_name("swarmd")
-                .current_version(self_update::cargo_crate_version!())
-                .build()?
-                .get_latest_release()?;
-
-            let last_version = release.version;
             let target = get_target();
-            let bin_path = format!("swarmd-v{last_version}-{target}/swarmd");
+            let bin_path = format!("swarmd-{target}/swarmd");
 
             let status = self_update::backends::github::Update::configure()
                 .repo_owner("swarmd-io")

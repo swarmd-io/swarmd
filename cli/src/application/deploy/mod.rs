@@ -1,4 +1,8 @@
-use crate::domain::{auth::AuthContext, worker_config::WorkerConfig, Env};
+use crate::domain::{
+    auth::AuthContext,
+    worker_config::{WorkerConfig, SWARMD_CONFIG_FILE},
+    Env,
+};
 use anyhow::Context;
 use clap::Args;
 use console::{style, Emoji};
@@ -8,8 +12,6 @@ use tokio::time::Instant;
 use super::command::SwarmdCommand;
 
 static DELIVERY: Emoji<'_, '_> = Emoji("🚚 ", "");
-
-const SWARMD_CONFIG_FILE: &str = "swarmd.toml";
 
 #[derive(Debug, Args)]
 pub struct DeployArg {

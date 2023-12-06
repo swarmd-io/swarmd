@@ -3,6 +3,7 @@ use crate::infrastructure::{NAME, VERSION};
 use async_trait::async_trait;
 use clap::{Parser, Subcommand};
 
+use super::dev::DevArg;
 use super::update::UpdateArg;
 use super::{command::SwarmdCommand, create::CreateArg, deploy::DeployArg, login::LoginArg};
 
@@ -35,6 +36,8 @@ pub enum Commands {
     Deploy(DeployArg),
     /// Update the Swarmd Cli
     Update(UpdateArg),
+    /// Run the Dev server
+    Dev(DevArg),
 }
 
 #[async_trait]
@@ -46,6 +49,7 @@ impl SwarmdCommand for Commands {
             Commands::Create(arg) => arg.execute(env).await,
             Commands::Deploy(arg) => arg.execute(env).await,
             Commands::Update(arg) => arg.execute(env).await,
+            Commands::Dev(arg) => arg.execute(env).await,
         }
     }
 }
