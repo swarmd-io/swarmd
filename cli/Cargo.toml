@@ -1,6 +1,6 @@
 [package]
 name = "swarmd"
-version = "0.1.10"
+version = "0.1.9"
 edition = "2021"
 description = "Swarmd CLI"
 authors = ["Swarmd Team"]
