@@ -54,6 +54,7 @@ impl AuthContext {
             crate::infrastructure::fs::base_directory().context("Couln't load base directory")?;
 
         let local_dir = project_dir.data_local_dir();
+        std::fs::create_dir_all(local_dir)?;
 
         let path = local_dir.join(AUTH_FILE);
         let auth_file = File::create(path)?;
@@ -70,6 +71,7 @@ impl AuthContext {
             crate::infrastructure::fs::base_directory().context("Couln't load base directory")?;
 
         let local_dir = project_dir.data_local_dir();
+        std::fs::create_dir_all(local_dir)?;
 
         let file_path = local_dir.join(AUTH_FILE);
 
