@@ -1,0 +1,81 @@
+[package]
+name = "swarmd_local_runtime"
+version = "0.0.1"
+authors.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Swarmd local Runtime to use it within the CLI, based on Deno"
+
+[lib]
+name = "swarmd_local_runtime"
+path = "src/lib.rs"
+
+[build-dependencies]
+deno_ast.workspace = true
+deno_core.workspace = true
+
+deno_console.workspace = true
+deno_crypto.workspace = true
+deno_fetch.workspace = true
+deno_http.workspace = true
+deno_tls.workspace = true
+deno_url.workspace = true
+deno_web.workspace = true
+deno_webidl.workspace = true
+deno_websocket.workspace = true
+deno_net.workspace = true
+
+# flate2 = { workspace = true, features = ["default"] }
+serde.workspace = true
+
+[dependencies]
+deno_ast.workspace = true
+deno_core.workspace = true
+
+deno_console.workspace = true
+deno_crypto.workspace = true
+deno_fetch.workspace = true
+deno_http.workspace = true
+deno_tls.workspace = true
+deno_url.workspace = true
+deno_web.workspace = true
+deno_webidl.workspace = true
+deno_websocket.workspace = true
+deno_net.workspace = true
+
+fly-accept-encoding = "0.2.0"
+
+tracing.workspace = true
+tracing-core.workspace = true
+
+# console_static_text.workspace = true
+# dlopen2.workspace = true
+# encoding_rs.workspace = true
+# filetime = "0.2.16"
+# fs3.workspace = true
+# http.workspace = true
+hyper = { version = "0.14.26", features = ["server", "stream", "http1", "http2", "runtime"] }
+# libc.workspace = true
+log.workspace = true
+serde.workspace = true
+# netif = "0.1.6"
+# notify.workspace = true
+# once_cell.workspace = true
+# regex.workspace = true
+# ring.workspace = true
+# signal-hook-registry = "1.4.0"
+# termcolor = "1.1.3"
+tokio.workspace = true
+# tokio-metrics.workspace = true
+# uuid.workspace = true
+# which = "4.2.5"
+
+# [target.'cfg(unix)'.dependencies]
+# nix.workspace = true
+
+[dev-dependencies]
+tracing-test = { version = "0.2", features = ["no-env-filter"] }
+tracing-subscriber = { version = "0.3", features = ["registry", "env-filter", "json"] }
+tracing-collector = "0.1"
+insta = "1"

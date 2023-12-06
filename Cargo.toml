@@ -7,7 +7,14 @@ members = [
   "lib/instruments",
   "lib/swarmd-generated",
   "lib/slug-rs",
+  "lib/swarmd_local_runtime",
 ]
+
+[workspace.package]
+authors = ["Swarmd"]
+edition = "2021"
+license = "MIT"
+repository = "https://github.com/swarmd-io/swarmd"
 
 [workspace.dependencies]
 anyhow = "1"
@@ -22,9 +29,11 @@ insta = { version = "1.33.0", features = ["yaml"] }
 clap = "4"
 config = "0.13"
 futures = "0.3"
+log = "0.4"
 schemars = { version = "0.8" }
 slug = "0.1"
 tracing = "0.1"
+tracing-core = "0.1"
 tracing-subscriber = "0.3"
 thiserror = "1"
 toml = "0.8"
@@ -35,10 +44,26 @@ sentry-tracing = "0.32"
 serde = "^1.0"
 serde_json = "1.0"
 
+# Deno
+deno_ast = { version = "0.31", features = ["transpiling"] }
+deno_core = "0.232"
+
+deno_console = "0.126"
+deno_crypto = "0.140"
+deno_fetch = "0.150"
+deno_http = "0.123"
+deno_tls = "0.113"
+deno_net = "0.118"
+deno_url = "0.126"
+deno_web = "0.157"
+deno_webidl = "0.126"
+deno_websocket = "0.131"
+
 # Internal
 swarmd_instruments = { version = "0.1", path = "./lib/instruments" }
 swarmd_generated = { version = "0.1.1-alpha.2", path = "./lib/swarmd-generated" }
 swarmd_slug-rs = { version = "0.1.1-alpha.2", path = "./lib/slug-rs" }
+swarmd_local_runtime = { version = "0.0.1", path = "./lib/swarmd_local_runtime" }
 
 [profile.dev]
 panic = "abort"

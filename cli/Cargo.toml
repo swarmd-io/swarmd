@@ -45,6 +45,9 @@ serde_with = "3"
 swarmd_slug-rs.workspace = true
 swarmd_generated.workspace = true
 
+swarmd_local_runtime.workspace = true
+deno_core.workspace = true
+
 self_update = { version = "0.39", features = ["archive-tar", "compression-flate2"] }
 
 # Log stack

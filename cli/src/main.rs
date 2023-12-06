@@ -64,7 +64,5 @@ async fn main() -> anyhow::Result<()> {
 
     config.execute(&env).await?;
 
-    println!("blblbl");
-
     Ok(())
 }

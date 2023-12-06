@@ -14,6 +14,7 @@ use swarmd_slug_rs::Slug;
 use super::{auth::AuthContext, Env};
 
 static CREATE: Emoji<'_, '_> = Emoji("🏗 ", "");
+pub const SWARMD_CONFIG_FILE: &str = "swarmd.toml";
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 pub enum ProfileEnum {
@@ -90,6 +91,12 @@ impl WorkerConfig {
                 "Couldn't execute the build_command properly"
             ))
         }
+    }
+
+    pub fn path_main_dist(&self) -> &PathBuf {
+        let profile = &self.profile;
+        let config = profile.get_config();
+        &config.worker_main
     }
 
     pub fn read_dist_sync(&self) -> anyhow::Result<Vec<u8>> {
