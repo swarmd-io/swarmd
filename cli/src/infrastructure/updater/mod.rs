@@ -20,6 +20,17 @@ pub async fn get_last_release() -> anyhow::Result<Option<Release>> {
 }
 
 pub async fn check_if_update_available() -> anyhow::Result<Option<String>> {
+    let build_date = env!("BUILD_DATE");
+    let now = chrono::Utc::now();
+    let date = chrono::DateTime::parse_from_rfc3339(build_date)?;
+    let dur = now.signed_duration_since(date);
+
+    // We only check after 3 days
+    // TODO: do only one check a day and store the data to reuse until tomorrow.
+    if dur < chrono::Duration::days(3) {
+        return Ok(None);
+    }
+
     if let Some(release) = get_last_release().await? {
         let current_version = self_update::cargo_crate_version!();
         if current_version == release.version {
