@@ -4135,7 +4135,7 @@ checksum = "81cdd64d312baedb58e21336b31bc043b77e01cc99033ce76ef539f78e965ebc"
 
 [[package]]
 name = "swarmd"
-version = "0.1.13"
+version = "0.1.14"
 dependencies = [
  "anyhow",
  "async-stream",
@@ -4208,7 +4208,7 @@ dependencies = [
 
 [[package]]
 name = "swarmd_local_runtime"
-version = "0.0.2"
+version = "0.0.3"
 dependencies = [
  "deno_ast",
  "deno_console",
