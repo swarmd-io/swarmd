@@ -2642,9 +2642,9 @@ dependencies = [
 
 [[package]]
 name = "once_cell"
-version = "1.18.0"
+version = "1.19.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "dd8b5dd2ae5ed71462c540258bedcb51965123ad7e7ccf4b9a8cafaa4a63576d"
+checksum = "3fdb12b2476b595f9358c5161aa467c2438859caa136dec86c26fdd2efe17b92"
 
 [[package]]
 name = "opaque-debug"
@@ -4135,7 +4135,7 @@ checksum = "81cdd64d312baedb58e21336b31bc043b77e01cc99033ce76ef539f78e965ebc"
 
 [[package]]
 name = "swarmd"
-version = "0.1.14"
+version = "0.1.15"
 dependencies = [
  "anyhow",
  "async-stream",
@@ -4208,7 +4208,7 @@ dependencies = [
 
 [[package]]
 name = "swarmd_local_runtime"
-version = "0.0.3"
+version = "0.0.4"
 dependencies = [
  "deno_ast",
  "deno_console",
