@@ -181,7 +181,7 @@ jobs:
       run: strip "$BIN"
 
     - name: Strip release binary (cross)
-      if: env.CARGO == 'cross'
+      if: env.CARGO == 'cross' && matrix.strip != ''
       shell: bash
       run: |
         docker run --rm -v \
@@ -189,6 +189,11 @@ jobs:
           "rustembedded/cross:${{ matrix.target }}" \
           "${{ matrix.strip }}" \
           "/target/${{ matrix.target }}/release/swarmd"
+
+    - name: Strip release binary (native strip)
+      if: matrix.os != 'macos-latest' && matrix.strip == ''
+      shell: bash
+      run: strip "$BIN"
 
     - name: Determine archive name
       shell: bash
