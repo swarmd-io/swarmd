@@ -63,7 +63,7 @@ deno_websocket = "0.131"
 swarmd_instruments = { version = "0.1", path = "./lib/instruments" }
 swarmd_generated = { version = "0.1.1-alpha.2", path = "./lib/swarmd-generated" }
 swarmd_slug-rs = { version = "0.1.1-alpha.2", path = "./lib/slug-rs" }
-swarmd_local_runtime = { version = "0.0.2", path = "./lib/swarmd_local_runtime" }
+swarmd_local_runtime = { version = "0.0.3", path = "./lib/swarmd_local_runtime" }
 
 [profile.dev]
 panic = "abort"
