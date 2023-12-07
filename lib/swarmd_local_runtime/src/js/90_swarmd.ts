@@ -24,6 +24,7 @@ function fakeFetchRequest(conn) {
 const swarmdNs = {
   fakeHttpSwarmdCreateConnection,
   fakeFetchRequest,
+  upgradeWebSocket: http.upgradeWebSocket,
 }
 
 export { swarmdNs }
