@@ -18,7 +18,14 @@ const INITIAL_SRC_CODE: FastString = FastString::Static(
             const method = req.request.method;
             console.log(`[LOG] ${now.toISOString()} ${method} - ${url}`);
 
-            await onRequest({ req });
+            try {
+                await onRequest({ req });
+            } catch (e) {
+                console.error(e);
+                req.respondWith(new Response(new Blob(["something went wrong"]), {
+                  status: 500,
+                }));
+            }
         }
     }
     "#,

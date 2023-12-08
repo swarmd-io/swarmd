@@ -62,6 +62,14 @@ impl SwarmdCommand for DevArg {
             handle.join()
         });
 
+        env.println("")?;
+        env.println("")?;
+
+        env.println(format!(
+            "Worker available at: {}",
+            style("http://127.0.0.1:13337").cyan().bold().dim(),
+        ))?;
+
         let _ = handle
             .await
             .map_err(|err| anyhow::anyhow!("{err}"))?
