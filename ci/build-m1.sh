@@ -36,3 +36,4 @@ cp cli/CHANGELOG.md "$ARCHIVE"/doc/
 tar czvf "$ARCHIVE.tar.gz" -C deployment/m1 "$NAME"
 shasum -a 256 "$ARCHIVE.tar.gz" > "$ARCHIVE.tar.gz.sha256"
 gh release upload "$version" "$ARCHIVE.tar.gz" "$ARCHIVE.tar.gz.sha256"
+gh release edit "$version" --draft=false --latest
