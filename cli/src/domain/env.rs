@@ -23,7 +23,7 @@ impl TryFrom<Cfg> for Env {
     fn try_from(_value: Cfg) -> Result<Self, Self::Error> {
         Ok(Self {
             http_client: HttpClient::new(),
-            http_url: "http://127.0.0.1:8087".to_string(),
+            http_url: "https://api.swarmd.io".to_string(),
             _indicator: Indicator::new(),
         })
     }
