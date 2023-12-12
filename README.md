@@ -4,6 +4,7 @@
   <a href="https://swarmd.io">
     <img src="https://swarmd.io/swarmd.svg" height="128" width="128">
     <h3 align="center"><a href="https://swarmd.io">Swarmd Preview</a></h3>
+    <h4 align="center"><a href="https://docs.swarmd.io">Documentation</a></h4>
   </a>
 </p>
 

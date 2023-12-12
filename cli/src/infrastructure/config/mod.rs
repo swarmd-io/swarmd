@@ -19,7 +19,6 @@ impl Cfg {
             )
             .build()?;
 
-        dbg!(&settings);
         let config = settings.try_deserialize::<Cfg>()?;
 
         Ok(config)

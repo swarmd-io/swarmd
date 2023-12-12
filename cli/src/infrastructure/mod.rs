@@ -16,6 +16,7 @@ pub const NAME: &str = env!("CARGO_CRATE_NAME");
 
 #[cfg(debug_assertions)]
 pub const VERSION: &str = concat!(
+    "DEBUG-",
     env!("CARGO_PKG_VERSION"),
     "-",
     env!("GIT_HASH"),
