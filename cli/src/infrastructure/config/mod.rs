@@ -3,7 +3,10 @@ use serde::{Deserialize, Serialize};
 
 /// Configuration file for the application.
 #[derive(Debug, Clone, Deserialize, Serialize)]
-pub struct Cfg {}
+pub struct Cfg {
+    #[serde(default)]
+    pub api: Option<String>,
+}
 
 impl Cfg {
     /// Read the associated configuration env
@@ -12,13 +15,14 @@ impl Cfg {
             .add_source(
                 config::Environment::with_prefix("SWARMD")
                     .try_parsing(true)
-                    .separator("_")
-                    .list_separator(","),
+                    .separator("_"),
             )
-            .build()?
-            .try_deserialize::<Cfg>()?;
+            .build()?;
 
-        Ok(settings)
+        dbg!(&settings);
+        let config = settings.try_deserialize::<Cfg>()?;
+
+        Ok(config)
     }
 }
 

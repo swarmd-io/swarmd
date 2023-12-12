@@ -8,6 +8,8 @@ use crate::infrastructure::{Cfg, Indicator};
 
 use super::auth::AuthContext;
 
+const PROD_URL: &str = "https://api.swarmd.io";
+
 /// Global Environment for the program execution
 #[derive(Debug, Clone)]
 pub struct Env {
@@ -20,10 +22,12 @@ pub struct Env {
 impl TryFrom<Cfg> for Env {
     type Error = anyhow::Error;
 
-    fn try_from(_value: Cfg) -> Result<Self, Self::Error> {
+    fn try_from(value: Cfg) -> Result<Self, Self::Error> {
+        let http_url = value.api.unwrap_or_else(|| PROD_URL.to_string());
+
         Ok(Self {
             http_client: HttpClient::new(),
-            http_url: "https://api.swarmd.io".to_string(),
+            http_url,
             _indicator: Indicator::new(),
         })
     }
