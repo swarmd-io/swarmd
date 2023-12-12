@@ -4135,7 +4135,7 @@ checksum = "81cdd64d312baedb58e21336b31bc043b77e01cc99033ce76ef539f78e965ebc"
 
 [[package]]
 name = "swarmd"
-version = "0.1.16"
+version = "0.1.17"
 dependencies = [
  "anyhow",
  "async-stream",
@@ -5925,9 +5925,9 @@ dependencies = [
 
 [[package]]
 name = "xattr"
-version = "1.1.2"
+version = "1.1.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d367426ae76bdfce3d8eaea6e94422afd6def7d46f9c89e2980309115b3c2c41"
+checksum = "a7dae5072fe1f8db8f8d29059189ac175196e410e40ba42d5d4684ae2f750995"
 dependencies = [
  "libc",
  "linux-raw-sys",
