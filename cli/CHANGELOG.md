@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.16](https://github.com/swarmd-io/swarmd/compare/swarmd-v0.1.15...swarmd-v0.1.16) - 2023-12-12
+
+### Fixed
+- use real api
+
+### Other
+- change some wording and add routes println
+
 ## [0.1.15](https://github.com/swarmd-io/swarmd/compare/swarmd-v0.1.14...swarmd-v0.1.15) - 2023-12-07
 
 ### Added
