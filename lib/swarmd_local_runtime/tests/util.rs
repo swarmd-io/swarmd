@@ -2,6 +2,7 @@ use deno_core::{FsModuleLoader, ModuleSpecifier};
 use std::rc::Rc;
 use swarmd_local_runtime::worker::{SwarmdWorker, WorkerOptions};
 
+#[allow(dead_code)]
 pub fn simple_worker(js_path: &str) -> (SwarmdWorker, ModuleSpecifier) {
     let main_module = ModuleSpecifier::from_file_path(js_path).unwrap();
 

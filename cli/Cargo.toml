@@ -46,6 +46,9 @@ directories = "5"
 git2 = { version = "0.18", features = ["vendored-libgit2"] }
 cfg-if = "1"
 serde_with = "3"
+notify = "6"
+notify-debouncer-full = "0.3"
+
 swarmd_slug-rs.workspace = true
 swarmd_generated.workspace = true
 

@@ -43,7 +43,7 @@
 use std::{
     ffi::OsStr,
     path::Path,
-    process::{Command, ExitStatus},
+    process::{Command, ExitStatus, Output},
 };
 
 use cfg_if::cfg_if;
@@ -291,6 +291,11 @@ impl Npm {
     pub fn custom(mut self, command: &str, args: Option<&[&str]>) -> Self {
         self.npm_append(command, args.unwrap_or_default());
         self
+    }
+
+    pub fn exec_no_log(mut self) -> Result<Output, std::io::Error> {
+        self.cmd.arg(self.args.join(" && "));
+        self.cmd.output()
     }
 
     /// Executes all the commands in the invokation order used, waiting for its completion status.

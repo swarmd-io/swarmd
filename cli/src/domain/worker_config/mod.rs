@@ -1,4 +1,4 @@
-use std::path::PathBuf;
+use std::{path::PathBuf, process::Output};
 
 use config::Config;
 use console::{style, Emoji};
@@ -76,13 +76,8 @@ impl WorkerConfig {
     }
 
     pub fn execute_build(&self) -> anyhow::Result<()> {
-        let profile = &self.profile;
-        let config = profile.get_config();
-        let exit_status = NpmEnv::default()
-            .with_node_env(&profile.to_node_env())
-            .init_env()
-            .raw_append(&config.build_command)
-            .exec()?;
+        let output = self.execute_no_log()?;
+        let exit_status = output.status;
 
         if exit_status.success() {
             Ok(())
@@ -91,6 +86,16 @@ impl WorkerConfig {
                 "Couldn't execute the build_command properly"
             ))
         }
+    }
+
+    pub fn execute_no_log(&self) -> anyhow::Result<Output> {
+        let profile = &self.profile;
+        let config = profile.get_config();
+        Ok(NpmEnv::default()
+            .with_node_env(&profile.to_node_env())
+            .init_env()
+            .raw_append(&config.build_command)
+            .exec_no_log()?)
     }
 
     pub fn path_main_dist(&self) -> &PathBuf {

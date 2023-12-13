@@ -1,12 +1,15 @@
+use std::{env::current_dir, time::Duration};
+
 use crate::domain::{
-    worker::simple_worker,
+    worker::start_background_worker,
     worker_config::{WorkerConfig, SWARMD_CONFIG_FILE},
     Env,
 };
 use anyhow::Context;
 use clap::Args;
 use console::{style, Emoji};
-use tokio::task::spawn_blocking;
+use notify::{RecursiveMode, Watcher};
+use notify_debouncer_full::new_debouncer;
 
 use super::SwarmdCommand;
 use swarmd_instruments::debug;
@@ -43,36 +46,83 @@ impl SwarmdCommand for DevArg {
             WorkerConfig::from_file(SWARMD_CONFIG_FILE).context("Couldn't load swarmd.toml.")?;
         let path_dist = config.path_main_dist().to_path_buf();
 
-        // TODO: Add auto-reload when dist file change.
+        let (notify_sender, mut notify_receiver) = tokio::sync::mpsc::channel(1024);
 
-        let handle = spawn_blocking(|| {
-            let handle = std::thread::spawn(|| {
-                let runtime = tokio::runtime::Builder::new_current_thread()
-                    .enable_all()
-                    .build()
-                    .unwrap();
+        let path = current_dir()?;
+        let mut debouncer = new_debouncer(Duration::from_secs(1), None, move |evt| {
+            notify_sender.blocking_send(evt).unwrap();
+        })?;
 
-                let local = tokio::task::LocalSet::new();
+        let src_path = path.join("src");
+        let node_modules = path.join("node_modules");
+        debouncer
+            .watcher()
+            .watch(&src_path, RecursiveMode::Recursive)?;
+        debouncer
+            .watcher()
+            .watch(&node_modules, RecursiveMode::Recursive)?;
 
-                local.block_on(&runtime, async move {
-                    let mut _worker = simple_worker(path_dist).await?;
-                    Ok::<_, anyhow::Error>(())
-                })
-            });
-            handle.join()
+        debouncer
+            .cache()
+            .add_root(&src_path, RecursiveMode::Recursive);
+        debouncer
+            .cache()
+            .add_root(&node_modules, RecursiveMode::Recursive);
+
+        let env_cloned = env.clone();
+        let handle = tokio::spawn(async move {
+            config.execute_no_log()?;
+            let mut handle = Some(start_background_worker(path_dist.clone()));
+
+            env_cloned.println("")?;
+            env_cloned.println("")?;
+
+            env_cloned.println(format!(
+                "Worker available at: {}",
+                style("http://127.0.0.1:13337").cyan().bold().dim(),
+            ))?;
+
+            while let Some(elt) = notify_receiver.recv().await {
+                let mut should_reload = false;
+                match elt {
+                    Ok(_) => {
+                        should_reload = true;
+                    }
+                    Err(errors) => {
+                        for e in errors {
+                            let kind = e.kind;
+                            env_cloned
+                                .println(format!("{}:", style(format!("{kind:?}")).red().bold()))?;
+
+                            for path in e.paths {
+                                env_cloned.println(format!(
+                                    "  [{}]",
+                                    style(path.to_str().unwrap_or("")).italic()
+                                ))?;
+                            }
+                        }
+                    }
+                }
+
+                if should_reload {
+                    if let Some((_, isolate_handle)) = handle.take() {
+                        let isolate = isolate_handle.await.expect(
+                        "Shouldn't fail as the isolate is send directly after the isolate creation",
+                    );
+                        let worker_over = isolate.terminate_execution().await?;
+                        let _ = worker_over.await;
+                    }
+                    env_cloned.println(format!("{}", style("Reloading...").cyan().bold()))?;
+                    config.execute_build()?;
+                    env_cloned.println(format!("{}", style("Reloaded").cyan().bold()))?;
+                    handle = Some(start_background_worker(path_dist.clone()));
+                }
+            }
+            Ok::<_, anyhow::Error>(())
         });
-
-        env.println("")?;
-        env.println("")?;
-
-        env.println(format!(
-            "Worker available at: {}",
-            style("http://127.0.0.1:13337").cyan().bold().dim(),
-        ))?;
 
         let _ = handle
             .await
-            .map_err(|err| anyhow::anyhow!("{err}"))?
             .map_err(|_| anyhow::anyhow!("An issue happened while joining the thread"))?
             .map_err(|err| anyhow::anyhow!("{err}"))?;
         Ok(())
