@@ -82,6 +82,7 @@ impl SwarmdCommand for DevArg {
                 style("http://127.0.0.1:13337").cyan().bold().dim(),
             ))?;
 
+            // TODO: add a way to restart it when that is crashing
             while let Some(elt) = notify_receiver.recv().await {
                 let mut should_reload = false;
                 match elt {
