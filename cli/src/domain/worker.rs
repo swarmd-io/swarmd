@@ -115,12 +115,8 @@ pub async fn simple_worker<P: AsRef<Path>>(
         match select(interrupt, event_loop_fut).await {
             // If interrupt is over, it means we closed or reloaded the server so we don't need to
             // send back the error.
-            futures::future::Either::Left((_, _)) => {
-                Ok(())
-            }
-            futures::future::Either::Right((a, _)) => {
-                a
-            }
+            futures::future::Either::Left((_, _)) => Ok(()),
+            futures::future::Either::Right((a, _)) => a,
         }
     });
     event_loop_handle.await??;
