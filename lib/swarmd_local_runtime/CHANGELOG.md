@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.5](https://github.com/swarmd-io/swarmd/compare/swarmd_local_runtime-v0.0.4...swarmd_local_runtime-v0.0.5) - 2023-12-13
+
+### Added
+- add auto-reload for dev command
+
 ## [0.0.4](https://github.com/swarmd-io/swarmd/compare/swarmd_local_runtime-v0.0.3...swarmd_local_runtime-v0.0.4) - 2023-12-07
 
 ### Added
