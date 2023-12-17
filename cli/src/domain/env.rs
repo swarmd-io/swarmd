@@ -53,7 +53,7 @@ impl Env {
 
     /// Get the AuthURL with redirection
     pub fn auth_url_with_local_redirect(&self, port: u16) -> anyhow::Result<Url> {
-        format!("{SWARMD_URL}/sign-up?port={port}")
+        format!("{SWARMD_URL}/sign-in?port={port}")
             .parse()
             .context("Can't parse URL properly with this port")
     }
