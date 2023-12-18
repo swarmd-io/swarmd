@@ -77,7 +77,18 @@ impl SwarmdCommand for CreateArg {
         git_hidden_repository.push(".git");
         std::fs::remove_dir_all(git_hidden_repository)?;
 
-        // TODO(@miaxos): Create the basic config file
+        let mut typescript_folder = base.clone();
+        typescript_folder.push("typescript");
+
+        let entries = std::fs::read_dir(&typescript_folder)?;
+
+        for entry in entries {
+            let entry = entry?;
+            let name = entry.file_name();
+            std::fs::rename(entry.path(), base.join(name))?;
+        }
+        std::fs::rename(typescript_folder, base.join("to_delete"))?;
+        std::fs::remove_dir(base.join("to_delete"))?;
 
         env.println(format!(
             "{} {}{} has been {}",
