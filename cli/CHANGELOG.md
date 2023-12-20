@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.21](https://github.com/swarmd-io/swarmd/compare/swarmd-v0.1.20...swarmd-v0.1.21) - 2023-12-20
+
+### Added
+- remove template folder when creating a new project
+
+### Other
+- show route when deploying
+
 ## [0.1.20](https://github.com/swarmd-io/swarmd/compare/swarmd-v0.1.19...swarmd-v0.1.20) - 2023-12-17
 
 ### Added
