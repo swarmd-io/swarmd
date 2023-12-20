@@ -79,7 +79,7 @@ impl SwarmdCommand for DeployArg {
 
         // Deploy worker with config
         let now = Instant::now();
-        let _ = config
+        let route_opt = config
             .deploy_worker(env, &auth, &project_id, worker_id_uploaded)
             .await?;
 
@@ -91,6 +91,16 @@ impl SwarmdCommand for DeployArg {
             style(&config.name).bold().cyan(),
             style(format!("{elapsed:?}")).bold().green()
         ))?;
+
+        if let Some(route) = route_opt {
+            env.println("")?;
+            env.println(format!(
+                "{} {}Worker deployed at {}",
+                style("").bold().dim(),
+                DELIVERY,
+                style(route).bold().magenta(),
+            ))?;
+        }
 
         Ok(())
     }

@@ -188,12 +188,12 @@ impl WorkerConfig {
         auth: &AuthContext,
         project_id: &str,
         deployed_worker_id: String,
-    ) -> anyhow::Result<String> {
+    ) -> anyhow::Result<Option<String>> {
         let org_id = self.organization_id(auth);
 
         let swarmd_client = env.swarmd_client()?;
 
-        let PublishWorkerResponse { id } =
+        let PublishWorkerResponse { id: _, route } =
             swarmd_generated::apis::project_api::organization_id_project_project_id_publish_put(
                 swarmd_client.as_ref(),
                 &org_id,
@@ -205,6 +205,6 @@ impl WorkerConfig {
             .await?;
 
         // Launch publish
-        Ok(id)
+        Ok(route)
     }
 }

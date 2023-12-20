@@ -12,10 +12,12 @@
 pub struct PublishWorkerResponse {
     #[serde(rename = "id")]
     pub id: String,
+    #[serde(rename = "route")]
+    pub route: Option<String>,
 }
 
 impl PublishWorkerResponse {
-    pub fn new(id: String) -> PublishWorkerResponse {
-        PublishWorkerResponse { id }
+    pub fn new(id: String, route: Option<String>) -> PublishWorkerResponse {
+        PublishWorkerResponse { id, route }
     }
 }
